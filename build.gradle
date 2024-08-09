@@ -1,0 +1,42 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'com.github.johnrengelman.shadow' version '7.1.2'
+}
+
+group = 'org.example'
+version = '1.0-SNAPSHOT'
+mainClassName = 'org.example.Main'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation platform('org.junit:junit-bom:5.9.1')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    implementation group: 'com.google.code.gson', name: 'gson', version: '2.11.0'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+application {
+    mainClassName = 'org.example.Main'
+}
+
+jar {
+    archiveBaseName.set('myname')
+    manifest {
+        attributes 'Main-Class': 'org.example.Main'
+    }
+}
+
+shadowJar {
+    archiveBaseName.set('myname')
+    archiveClassifier.set('')
+    archiveVersion.set('')
+}
+
+
